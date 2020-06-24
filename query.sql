@@ -6,7 +6,7 @@
     WHERE ID_BRAND = B.ID
     FOR XML PATH (''))
   , 1, 2, '') 'Models'
- ,B.CEO AS 'CEO'
+ ,CEO.NAME AS 'CEO'
  ,C.NAME AS 'Country'
  ,H.NAME AS 'Headquarters'
  ,STUFF((SELECT
@@ -36,8 +36,10 @@
   , 1, 0, '') AS 'Operatingincome'
 
 FROM TAB_BRAND AS B
+JOIN TAB_CEO AS CEO
+  ON CEO.ID = B.ID_CEO
 JOIN TAB_COUNTRY AS C
-  ON C.ID_BRAND = B.ID
+  ON C.ID = B.ID_COUNTRY
 JOIN TAB_HEADQUARTERS AS H
-  ON H.ID_BRAND = B.ID;
+  ON H.ID = B.ID_HEADQUARTERS;
 
